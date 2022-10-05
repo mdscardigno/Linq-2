@@ -15,7 +15,7 @@ namespace Linq
             Console.WriteLine("Welcome to Linq");
 
             var scores = new List<int> { 42, 100, 98, 15 };
-            Console.WriteLine(string.Join(", ", scores));
+            // Console.WriteLine(string.Join(", ", scores));
 
             //Function expressions seem like they can behave like methods
             //Function expressions and methods are identical except for that we can treat the code in the function expression as if it were a variable
