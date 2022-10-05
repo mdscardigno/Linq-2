@@ -55,7 +55,8 @@ namespace Linq
             // }
 
             //LINQ METHODS:
-            // SELECT
+            // SELECT: Generic Method and can work with any expression we give it 
+            //
             //NEW WAY - LINQ
             //IEnumerable means they are countable and and we can work our way through them in some sequence
             //It does not return a new list. What returns is a IEnumerable which talks like the list, walks like the list, so we can just treated like a list
@@ -64,15 +65,16 @@ namespace Linq
             // var newScores = scores.Select(value => value * 2);// this in other programming languages can be Map or Reduce to transform data which is the same as a select
             //we are now to change the name of the variable we are passing in to the function expression from value to score
             var newScores = scores.Select(score => score * 2);
+            var slightlyBetterDoubleScores = newScores.Select(score => score + 1);// as long as that transform works in Integers, we can use it to transform it any way we like
             //So the statement above will read: newScores is going to be the old scores projected/selected/transformed by taking each score and multiplying it by 2
             //
-            foreach (var score in newScores)
-            {
-                Console.WriteLine(score);
-            }
+            // foreach (var score in newScores)
+            // {
+            //     Console.WriteLine(score);
+            // }
             //Small differences between an IEnumerable and a List
-            Console.WriteLine(scores.Count); //We can use Count() on a List 
-            Console.WriteLine(newScores.Count());//once we have an IEnumerable Count becomes a method and not longer a property
+            // Console.WriteLine(scores.Count); //We can use Count() on a List 
+            // Console.WriteLine(newScores.Count());//once we have an IEnumerable Count becomes a method and not longer a property
 
             // Console.WriteLine(string.Join(", ", newScores));
         }
