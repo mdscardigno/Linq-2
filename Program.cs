@@ -353,10 +353,11 @@ namespace Linq
 
             //movies is a list of movies and movie is a single movie
             var movieNames = listOfFilms.Select(film => film.Name);
-
             //if things is a list of book then thing is a book
             //if plural is a list of things then singular is a thing
             //if cars is a list of car then car is a car
+
+
         }
     }
 }
