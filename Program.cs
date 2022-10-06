@@ -357,6 +357,11 @@ namespace Linq
             //if plural is a list of things then singular is a thing
             //if cars is a list of car then car is a car
 
+            //there are two variables bellow
+            //the first variable is a list of the things in the list
+            //the second variable is index which will be an integer which is counting 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+            //I can build a new string as shown below
+            var movieNamesWithIndex = listOfFilms.Select((film, index) => $"The movie named {film.Name} is at position {index}");
 
         }
     }
