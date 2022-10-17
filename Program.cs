@@ -7,6 +7,7 @@ namespace Linq
 
     class Movie
     {
+        //These are all the things a Movie knows about:
         public int Id { get; set; }
         public string Title { get; set; }
         public string Name { get; set; }
@@ -17,6 +18,12 @@ namespace Linq
         public double TotalRevenue { get; set; }
         public double Cost { get; set; }
         public double Budget { get; set; }
+
+        //behavior of Movie
+        public double RevenuePerScreenings()
+        {
+            return TotalRevenue / Screenings;
+        }
 
     }
 
@@ -356,13 +363,21 @@ namespace Linq
             //if things is a list of book then thing is a book
             //if plural is a list of things then singular is a thing
             //if cars is a list of car then car is a car
+            //So now this averages is going to be a IEnumerable of doubles
+            var averages = listOfFilms.Select(film => film.RevenuePerScreenings());
 
             //there are two variables bellow
             //the first variable is a list of the things in the list
             //the second variable is index which will be an integer which is counting 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
             //I can build a new string as shown below
             var movieNamesWithIndex = listOfFilms.Select((film, index) => $"The movie named {film.Name} is at position {index}");
+            var tacoTuesdays = listOfFilms.Select((film, index) => index * film.Budget);
+            //example with tuples
+            var tacoTuesdayTuple = listOfFilms.Select((film, index) => new Tuple<int, string>(index, film.Name));
 
+            //
+            //ANOTHER METHOD OF LINQ
+            //
         }
     }
 }
