@@ -397,9 +397,15 @@ namespace Linq
             //chained together
             //I don't have to put it inside of a variable. Putting it inside a variable gives me a name for it
             var popularFilmNamesInOneStep = listOfFilms.Where(film => film.Screenings >= 100).Select(film => film.Name);
-
-
-
+            foreach (var x in popularFilms)
+            {
+                Console.WriteLine(x.Name);
+            }
+            //THIS DOES THE SAME THING
+            foreach (var x in popularFilmNames)
+            {
+                Console.WriteLine(x);
+            }
 
 
         }
