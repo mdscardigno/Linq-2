@@ -370,14 +370,38 @@ namespace Linq
             //the first variable is a list of the things in the list
             //the second variable is index which will be an integer which is counting 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
             //I can build a new string as shown below
+            //mode one select with one variable
             var movieNamesWithIndex = listOfFilms.Select((film, index) => $"The movie named {film.Name} is at position {index}");
             var tacoTuesdays = listOfFilms.Select((film, index) => index * film.Budget);
             //example with tuples
+            //mode two select with two variables
+            //each film is popping out of listOfFilms and index is is a number Select is helping me with: this film is at index 1, this fil is at index 2, .... in case I need it
             var tacoTuesdayTuple = listOfFilms.Select((film, index) => new Tuple<int, string>(index, film.Name));
 
             //
             //ANOTHER METHOD OF LINQ
             //
+            //Where statement is like a filter. We use it when we want to make a new list, keeping only some of the items from the original list.
+            //Make a new list, of equal or smaller size by running an expression against every item. keeping only items when the expression returns true.
+            //Where cannot change the data.
+            //Go through the list and only keep the ones that meet the criteria, thats when Where comes into place
+            //In the left side of a Where we are asking a boolean question
+            //gets a list of the popular films
+            var popularFilms = listOfFilms.Where(film => film.Screenings >= 100);
+
+            //Combining Select and Where
+            //If you are not accurate in your words, you are not accurate on your thinking
+            //.... and if you are not accurate on your thinking, you are not accurate on your results
+            //now translate the list of the movies to the list of movie names
+            var popularFilmNames = popularFilms.Select(film => film.Name);
+            //chained together
+            //I don't have to put it inside of a variable. Putting it inside a variable gives me a name for it
+            var popularFilmNamesInOneStep = listOfFilms.Where(film => film.Screenings >= 100).Select(film => film.Name);
+
+
+
+
+
         }
     }
 }
