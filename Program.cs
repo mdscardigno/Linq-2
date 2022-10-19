@@ -397,15 +397,78 @@ namespace Linq
             //chained together
             //I don't have to put it inside of a variable. Putting it inside a variable gives me a name for it
             var popularFilmNamesInOneStep = listOfFilms.Where(film => film.Screenings >= 100).Select(film => film.Name);
-            foreach (var x in popularFilms)
+            // foreach (var x in popularFilms)
+            // {
+            //     Console.WriteLine(x.Name);
+            // }
+            // //THIS DOES THE SAME THING
+            // foreach (var x in popularFilmNames)
+            // {
+            //     Console.WriteLine(x);
+            // }
+            //Console.WriteLine(String.Join(",", popularFilmNames));
+
+            //Aggregate often called reduce in other languages.
+            //The Aggregate method takes the list and processes it down into a single value.
+            //Returns a single value. It starts with a value we will call the current value. The given expression gets to use, one at a time, the current value and the item from the list, returning
+            //a new current value.
+            //Snake that eats its own tail
+            //Find the total revenue for all movies
+            //var TotalRevenue = movieNames.Aggregate((current, next) => current + next);
+
+            //Finding the total revenue for all movies
+            // var totalRevenue = listOfFilms.Aggregate((0.0, (currentTotal, film) => currentTotal + film.TotalRevenue));
+            //Sum
+            //In this example we first take all the movies and use Select to generate a new list of all the revenues. Then we use Sum to add up the values.
+            //Simpler than Aggregate
+            var allRevenues = listOfFilms.Select(film => film.TotalRevenue);
+            var totalRevenue = allRevenues.Sum();
+            Console.WriteLine(totalRevenue);
+
+            var totalRevenueOneStep = listOfFilms.Sum(film => film.TotalRevenue);
+            var totalScreenings = listOfFilms.Sum(film => film.Screenings);
+            //All method
+            //Returns a single bool which will be true if the expression is true for every element in the list.
+            //Returns a boolean if the expression evaluates to true for every element in the list.
+
+            //Figure out if all the movies are old movies, before 1965
+            var areAllOldMovies = listOfFilms.All(film => film.ReleasedDate.Year < 1965);
+
+            //Any
+            //Returns a boolean if there is even a single element in the lost that causes the expression to return true.
+            //Figure out if there is even a single old movie before 1965 in our list
+            var areAnyOldMovies = listOfFilms.Any(film => film.ReleasedDate.Year < 1965);
+            //Get count of movies that cost more than $10 to see
+            var moviesThatCostMoreThanTenDollars = listOfFilms.Count(film => film.PricePerTicket > 10);
+            //this is kind of the same
+            var anotherWayOfCountingMoviesCostingMoreThanTenDollars = listOfFilms.Where(film => film.PricePerTicket > 10).Count();
+            Console.WriteLine($"There is {anotherWayOfCountingMoviesCostingMoreThanTenDollars} that cost more than $10.");
+            //First method
+            //First returns a single element from the list which is the first item for which the expression returns true. If no item is found, an exception is thrown.
+            //Our favorite movie is Jaws
+            //Let's get it from the lost if it is there. If it isn't well get an exemption / error.
+            // var favoriteMovie = listOfFilms.First(film => film.Name == "Jaws");
+            //Unhandled Exemption
+            // var favoriteMovie = listOfFilms.First(film => film.Name == "Back to the Future");
+            //Null Exception
+            var favoriteMovie = listOfFilms.FirstOrDefault(film => film.Name == "Back to the Future");
+            //guarding if to check if a variable is null
+            if (favoriteMovie == null)
             {
-                Console.WriteLine(x.Name);
+                //variable is null and not ok to use
+                Console.WriteLine("Nope, no such a movie!.");
             }
-            //THIS DOES THE SAME THING
-            foreach (var x in popularFilmNames)
+            else
             {
-                Console.WriteLine(x);
+                //variable is not null and is a totally fine 'Movie' object to use
+                Console.WriteLine($"The budget for {favoriteMovie.Name} was {favoriteMovie.Budget}");
             }
+
+            //Unit 3 we will learn how to handle exceptions
+            //There are more methods in LINQ: FindIndex, First, FirstOrDefault, Last, LastOrDefault, Distinct, Sum, Take, Skip, OrderBy, OrderByIncreasing, OrderByDescending, ThenBy...
+            //Take and Skip do pagination
+            //These are the most used methods in LINQ
+            //Look at the quick reference guide for linq and refresh what each method does
 
 
         }
